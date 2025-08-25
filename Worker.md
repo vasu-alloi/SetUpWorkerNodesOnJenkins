@@ -47,17 +47,17 @@ RI = predictable workload, cheaper (30–70% savings).
 
 ✅ Recommendation: Keep master on On-Demand or Reserved (not Spot), since you don’t want your control plane to die.
 
-### 🔹 2. Jenkins Worker Nodes
+###  2. Jenkins Worker Nodes
 
 ### Here’s the big decision point:
 
-Option A: Static Worker Nodes
+#### Option A: Static Worker Nodes
 
 You provision EC2 worker nodes permanently.
 
 Simple, but costly (workers may sit idle).
 
-Option B: Ephemeral Worker Nodes (Recommended)
+#### Option B: Ephemeral Worker Nodes (Recommended)
 
 Use EC2 Auto Scaling Group (with Spot + On-Demand mix).
 
@@ -74,7 +74,7 @@ You scale on-demand.
 
 Cheaper (use Spot workers safely).
 
-### 🔹 3. Performance Tuning
+### 3. Performance Tuning
 
 Plugins → Remove unused plugins (too many = slow Jenkins).
 
@@ -88,10 +88,10 @@ Storage → Ensure builds/artifacts are on S3 or external storage, not filling /
 
 🎯 My Recommendation (as your Jenkins Manager)
 
-Master: Run on m5.large or c5.large On-Demand/Reserved (never Spot).
+#### Master: Run on m5.large or c5.large On-Demand/Reserved (never Spot).
 
-Workers: Run ephemeral workers using ASG + Spot instances (saves cost, scalable).
+#### Workers: Run ephemeral workers using ASG + Spot instances (saves cost, scalable).
 
-Performance: Audit plugins, tune JVM, and move artifacts/logs to S3.
+#### Performance: Audit plugins, tune JVM, and move artifacts/logs to S3.
 
 👉 This way, your master is stable (always up), while your workers are elastic & cost-efficient.
