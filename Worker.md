@@ -33,7 +33,7 @@ Run a pipeline with agent { label 'ec2-agent' }.
 Jenkins will spin up EC2 → run job → terminate after use.
 
 
-1. Jenkins Master Node
+### 1. Jenkins Master Node
 
 Upgrade Instance Type → If your Jenkins master is slow (UI lag, queue delays, config saves taking long), increasing instance type (e.g., t3.medium → t3.large or even m5.large) helps.
 
@@ -47,9 +47,9 @@ RI = predictable workload, cheaper (30–70% savings).
 
 ✅ Recommendation: Keep master on On-Demand or Reserved (not Spot), since you don’t want your control plane to die.
 
-🔹 2. Jenkins Worker Nodes
+### 🔹 2. Jenkins Worker Nodes
 
-Here’s the big decision point:
+### Here’s the big decision point:
 
 Option A: Static Worker Nodes
 
@@ -74,7 +74,7 @@ You scale on-demand.
 
 Cheaper (use Spot workers safely).
 
-🔹 3. Performance Tuning
+### 🔹 3. Performance Tuning
 
 Plugins → Remove unused plugins (too many = slow Jenkins).
 
