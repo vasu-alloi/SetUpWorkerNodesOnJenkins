@@ -58,19 +58,19 @@ sudo usermod -aG docker ubuntu
 ssh -i mykey.pem ubuntu@<worker-public-ip>
 ```
 #### Step 2: Create an AMI
-
+```
 a.Once the worker is ready, stop unnecessary services and shut down.
 
 b.From EC2 Console → Create Image (AMI) from the worker instance.
 
 c.Name it: JenkinsImage.
-
+```
 <img width="1694" height="184" alt="image" src="https://github.com/user-attachments/assets/365fb2fe-9ad7-4ee3-99eb-e45921e9ca8a" />
 
 This AMI will be the base for your ASG workers.
 
 ### Step 3: Create a Launch Template
-
+```
 1.Go to EC2 → Launch Templates → Create new template.
 
 2.AMI: JenkinsImage.
@@ -83,6 +83,7 @@ This AMI will be the base for your ASG workers.
 
 6.User Data (optional, auto-install Jenkins agent if you want):
 ```
+```
 #!/bin/bash
 apt update -y
 apt install -y openjdk-17-jdk
@@ -91,7 +92,7 @@ apt install -y openjdk-17-jdk
 <img width="1670" height="159" alt="image" src="https://github.com/user-attachments/assets/e7d0f902-ac03-4542-99b5-f2258c7d61cc" />
 
 ### Step 4: Create Auto Scaling Group (ASG)
-
+```
 1.Go to EC2 → Auto Scaling Groups → Create ASG.
 
 2.Choose Launch Template from Step 3.
@@ -109,13 +110,14 @@ apt install -y openjdk-17-jdk
 7.Use On-Demand or Spot Instances (cheaper but less reliable).
 
 8.Finish setup.
+```
 <img width="1852" height="770" alt="image" src="https://github.com/user-attachments/assets/d4e0759a-4166-4bd8-b7f9-00a96b9a0984" />
 
 
 Now you have an ASG that can spin up workers when Jenkins requests.
 
 ### Step 5: Configure Jenkins Master
-
+```
 1.Install required plugins in Jenkins Master:
 
 2.EC2 Plugin or EC2 Fleet Plugin.
@@ -131,9 +133,10 @@ Now you have an ASG that can spin up workers when Jenkins requests.
 7.Username: ubuntu (or AMI’s default user).
 
 8.Paste private key (.pem file contents).
+```
 
 #### Configure Jenkins Cloud (if EC2 plugin):
-
+```
 1.Manage Jenkins → Nodes and Clouds → Configure Clouds.
 
 2.Add Amazon EC2 cloud.
@@ -147,12 +150,13 @@ Now you have an ASG that can spin up workers when Jenkins requests.
 6.Connect via SSH.
 
 7.Label workers (e.g., workerNode).
-
+```
 #### Test by launching a new worker:
 
 Jenkins will request ASG → ASG spins up EC2 → Jenkins connects → Runs pipeline.
 
 #### (Alternative): Configure Jenkins Master with EC2-Fleet Plugin
+```
 1. Install Plugin
 
 Go to Manage Jenkins → Plugins → Available plugins.
@@ -196,7 +200,7 @@ Fleet ID:
 If you already created an Auto Scaling Group (ASG) → use the ASG ARN/Name.
 
 If you’re using an EC2 Spot Fleet/Capacity Reservation → use Fleet ID.
-
+```
 #### Step 6: Connection between Jenkins Master & Worker
 
 Jenkins connects over SSH or JNLP (TCP/50000).
