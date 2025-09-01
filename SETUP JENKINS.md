@@ -18,7 +18,7 @@ Enable SSH key pair access.
 You need an EC2 Key Pair for Jenkins Master to connect to workers via SSH.
 
 Steps:
-
+```
 1.In AWS Console → EC2 → Key Pairs → Create key pair.
 
 2.Name: jenkins-workers-key.
@@ -32,7 +32,7 @@ Steps:
 6.Launch your worker instance with this key pair.
 
 7.In EC2 Launch Wizard → Key pair (login) → select jenkins-workers-key.
-
+```
 Test SSH:
 ```
 chmod 400 jenkins-workers-key.pem
