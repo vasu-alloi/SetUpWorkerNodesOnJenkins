@@ -8,9 +8,9 @@ Jenkins Master → Triggers Build → ASG Spins Up Worker → Worker Connects vi
 #### Step 1: Prepare Base Worker Node
 #### 1.1 Launch EC2 Instance
 
-    **OS:** Ubuntu (preferred)
-    **VPC/Subnet:** Same as Jenkins Master for connectivity
-    **IAM Role:** Attach policies for:
+    OS:Ubuntu (preferred)
+    VPC/Subnet:Same as Jenkins Master for connectivity
+    IAM Role:Attach policies for:
 ```
 AmazonEC2FullAccess (restrict in production)
 CloudWatchAgentServerPolicy (optional, for monitoring)
@@ -21,16 +21,16 @@ CloudWatchAgentServerPolicy (optional, for monitoring)
 **Method 1:** AWS Key Pair (Recommended for AWS)
     
     1.Go to AWS Console → EC2 → Key Pairs → Create key pair
-    2.**Settings:**
+    2.Settings:
 
-   Name: jenkins-workers-key
-   Type: RSA
-   Format: PEM
+      Name: jenkins-workers-key
+      Type: RSA
+      Format: PEM
 
-
-**3.Download the .pem file (keep secure!)
-4.Launch worker with this key pair
-5.Test connection:**
+   
+      3.Download the .pem file (keep secure!)
+      4.Launch worker with this key pair
+      5.Test connection:
 ```
 chmod 400 jenkins-workers-key.pem
 ssh -i jenkins-workers-key.pem ubuntu@<worker-public-ip>
