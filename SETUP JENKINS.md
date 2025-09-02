@@ -7,11 +7,11 @@ Use the same VPC & Subnet where your Jenkins Master can reach it.
 <img width="1684" height="256" alt="image" src="https://github.com/user-attachments/assets/a902a061-97de-4af4-be7c-b88f738986a9" />
 
 #### Assign IAM Role with policies for:
-
+```
 AmazonEC2FullAccess (for testing, later restrict).
 
 CloudWatchAgentServerPolicy (optional, for monitoring).
-
+```
 Enable SSH key pair access.
 #### Method1:
 
@@ -39,12 +39,55 @@ chmod 400 jenkins-workers-key.pem
 ssh -i jenkins-workers-key.pem ubuntu@<worker-public-ip>
 
 ```
-#### Add Security Group rules to allow:
+#### Method 2:
+Here are the SSH key generation and setup commands for Jenkins:
+1. Generate SSH Key Pair
+```
+# Generate a new SSH key pair (RSA, 4096 bits)
+ssh-keygen -t rsa -b 4096 -C "jenkins@your-domain.com"
 
+# Or generate ED25519 key (more secure, recommended)
+ssh-keygen -t ed25519 -C "jenkins@your-domain.com"
+```
+When prompted:
+```
+File location: Press Enter for default (~/.ssh/id_rsa) or specify custom path
+Passphrase: Leave empty for Jenkins automation or add for extra security
+```
+2. Copy Public Key to Agent Machine
+```
+# Copy public key to remote agent
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@agent-machine-ip
+
+# Or manually copy the key
+cat ~/.ssh/id_rsa.pub | ssh username@agent-machine-ip "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+```
+3. Test SSH Connection
+```
+# Test connection (should connect without password)
+ssh -i ~/.ssh/id_rsa username@agent-machine-ip
+```
+4. Jenkins Setup
+```
+In Jenkins UI:
+
+Go to Manage Jenkins → Manage Credentials
+Add new SSH Username with private key credential
+Paste the private key content (cat ~/.ssh/id_rsa)
+When creating nodes, select Launch agents via SSH and use this credential
+
+Key file locations:
+
+Private key: ~/.ssh/id_rsa (keep on Jenkins master)
+Public key: ~/.ssh/id_rsa.pub (copy to agent machines)
+```
+   
+#### Add Security Group rules to allow:
+```
 SSH (22) from Jenkins Master IP.
 
 Jenkins Master → Worker Communication (default TCP 50000 for JNLP).
-
+```
 #### 2.Connect to the instance and install dependencies:
 ```
 # Update & install packages
