@@ -153,9 +153,9 @@ cat ~/.ssh/id_rsa  # Copy this content
 
 **5.3 Configure Cloud (EC2 Plugin Method)**
 
-1.Manage Jenkins → Nodes and Clouds → Configure Clouds
-2.Add new cloud → Amazon EC2
-3.Configuration:
+    1.Manage Jenkins → Nodes and Clouds → Configure Clouds
+    2.Add new cloud → Amazon EC2
+    3.Configuration:
 ```
 Name: aws-workers
 AWS Credentials: Add AWS access credentials
