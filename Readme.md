@@ -142,10 +142,10 @@ Complete ASG creation. Workers will now spin up on-demand.
 ```
 **5.2 Add SSH Credentials**
 
-1.Manage Jenkins → Credentials → Add Credentials
-2.Kind: SSH Username with private key
-3.Username: ubuntu (or your AMI's default user)
-4.Private Key: Paste contents of your .pem file or private key
+    1.Manage Jenkins → Credentials → Add Credentials
+    2.Kind: SSH Username with private key
+    3.Username: ubuntu (or your AMI's default user)
+    4.Private Key: Paste contents of your .pem file or private key
 ```
 cat ~/.ssh/id_rsa  # Copy this content
 ```
