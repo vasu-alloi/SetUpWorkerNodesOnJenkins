@@ -6,7 +6,7 @@ This guide walks you through setting up dynamic Jenkins worker nodes using AWS E
 Jenkins Master → Triggers Build → ASG Spins Up Worker → Worker Connects via SSH/JNLP → Executes Job → Worker Terminates
 ```
 #### Step 1: Prepare Base Worker Node
-##### 1.1 Launch EC2 Instance
+#### 1.1 Launch EC2 Instance
 
 **OS:** Ubuntu (preferred)
 **VPC/Subnet:** Same as Jenkins Master for connectivity
@@ -17,7 +17,7 @@ CloudWatchAgentServerPolicy (optional, for monitoring)
 ```
 
 
-##### 1.2 SSH Key Setup - Two Methods
+#### 1.2 SSH Key Setup - Two Methods
 **Method 1:** AWS Key Pair (Recommended for AWS)
 
 Go to AWS Console → EC2 → Key Pairs → Create key pair
