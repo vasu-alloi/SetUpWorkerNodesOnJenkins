@@ -5,7 +5,7 @@ This guide walks you through setting up dynamic Jenkins worker nodes using AWS E
 ```
 Jenkins Master → Triggers Build → ASG Spins Up Worker → Worker Connects via SSH/JNLP → Executes Job → Worker Terminates
 ```
-#### Step 1: Prepare Base Worker Node
+### Step 1: Prepare Base Worker Node
 #### 1.1 Launch EC2 Instance
 
     OS:Ubuntu (preferred)
@@ -17,7 +17,7 @@ CloudWatchAgentServerPolicy (optional, for monitoring)
 ```
 
 
-#### 1.2 SSH Key Setup - Two Methods
+### 1.2 SSH Key Setup - Two Methods
 **Method 1:** AWS Key Pair (Recommended for AWS)
     
     1.Go to AWS Console → EC2 → Key Pairs → Create key pair
@@ -74,7 +74,7 @@ sudo usermod -aG docker ubuntu
 # Verify Java installation
 java -version
 ```
-#### Step 2: Create AMI (Amazon Machine Image)
+### Step 2: Create AMI (Amazon Machine Image)
 **2.1 Prepare Instance for AMI**
 ```
 1.Stop unnecessary services on the worker
@@ -93,7 +93,7 @@ java -version
 Note: This AMI becomes the template for all future worker instances
 
 
-#### Step 3: Create Launch Template
+### Step 3: Create Launch Template
 **3.1 Launch Template Configuration**
 ```
 1.Go to EC2 → Launch Templates → Create launch template
@@ -113,7 +113,7 @@ apt install -y openjdk-17-jdk
 **3.3 Save Template**
 Click Create launch template
 
-#### Step 4: Create Auto Scaling Group (ASG)
+### Step 4: Create Auto Scaling Group (ASG)
 **4.1 ASG Configuration**
 ```
 1.Go to EC2 → Auto Scaling Groups → Create Auto Scaling group
@@ -132,7 +132,7 @@ Instance type: On-Demand or Spot (Spot is cheaper but less reliable)
 **4.3 Finish Setup**
 Complete ASG creation. Workers will now spin up on-demand.
 
-#### Step 5: Configure Jenkins Master
+### Step 5: Configure Jenkins Master
 **5.1 Install Required Plugins**
 ```
 1.Go to Manage Jenkins → Plugins → Available plugins:
@@ -182,9 +182,9 @@ SSH Credentials: Select from Step 5.2
 
 
 
-#### Step 6: Test Connection & Verification
+### Step 6: Test Connection & Verification
 **6.1 Manual Connection Test**
-**From Jenkins Master:**
+##### From Jenkins Master:
 ```
 # Test SSH connection to worker
 ssh -i jenkins-workers-key.pem ubuntu@<worker-private-ip>
@@ -207,7 +207,7 @@ sudo docker ps
 7.Save and check connection logs
 ```
 
-#### Step 7: Create and Run Pipelines
+### Step 7: Create and Run Pipelines
 **7.1 Example Pipeline Using Dynamic Workers**
 ```
 pipeline {
@@ -280,7 +280,7 @@ Secure credentials storage: Use Jenkins credential store
 Node security: Configure node security appropriately
 Build isolation: Ensure builds don't interfere with each other
 ```
-#### Troubleshooting Common Issues
+### Troubleshooting Common Issues
 **Connection Problems**
 ```
 # Check Jenkins Master → Worker connectivity
