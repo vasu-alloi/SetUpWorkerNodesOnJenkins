@@ -23,9 +23,9 @@ CloudWatchAgentServerPolicy (optional, for monitoring)
     1.Go to AWS Console → EC2 → Key Pairs → Create key pair
     2.**Settings:**
 
-**Name:** jenkins-workers-key
-**Type:** RSA
-**Format:** PEM
+   Name: jenkins-workers-key
+   Type: RSA
+   Format: PEM
 
 
 **3.Download the .pem file (keep secure!)
