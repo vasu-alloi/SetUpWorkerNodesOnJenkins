@@ -169,9 +169,9 @@ Labels: worker-node (for pipeline targeting)
 
 **5.4 Alternative: EC2 Fleet Plugin Configuration**
 
-1.Manage Jenkins → Nodes and Clouds → Configure Clouds
-2.Add new cloud → EC2 Fleet
-3.Settings:
+    1.Manage Jenkins → Nodes and Clouds → Configure Clouds
+    2.Add new cloud → EC2 Fleet
+    3.Settings:
 ```
 Name: aws-fleet
 AWS Credentials: Your AWS credentials
